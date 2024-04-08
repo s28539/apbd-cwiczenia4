@@ -44,5 +44,34 @@ public class UserServiceTests
         //Assert
         Assert.Equal(false, result);
     }
+    [Fact]
+    public void AddUser_ThrowsArgumentExceptionWhenClientDoesNotExist()
+    {
+        
+        // Arrange
+        var userService = new UserService();
+
+        // Act
+        Action action = () => userService.AddUser(
+            "Jan", 
+            "Kowalski", 
+            "kowalski@kowalski.pl",
+            DateTime.Parse("2000-01-01"),
+            100
+        );
+
+        // Assert
+        Assert.Throws<ArgumentException>(action);
+    }
+    
+    
+    // AddUser_ReturnsFalseWhenMissingAtSignAndDotInEmail
+    // AddUser_ReturnsFalseWhenYoungerThen21YearsOld
+    // AddUser_ReturnsTrueWhenVeryImportantClient
+    // AddUser_ReturnsTrueWhenImportantClient
+    // AddUser_ReturnsTrueWhenNormalClient
+    // AddUser_ReturnsFalseWhenNormalClientWithNoCreditLimit
+    // AddUser_ThrowsExceptionWhenUserDoesNotExist
+    // AddUser_ThrowsExceptionWhenUserNoCreditLimitExistsForUser
 
 }
