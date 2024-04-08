@@ -11,7 +11,7 @@ public class UserServiceTests
 
         //Act
         var result = userService.AddUser(
-            null,"Kowalski","kowalski@gmail.com",
+            null, "Kowalski", "kowalski@gmail.com",
             DateTime.Parse("2000-01-01"),
             1);
 
@@ -24,11 +24,25 @@ public class UserServiceTests
     {
         //Arrange
         var userService = new UserService();
-        
+
         //Act
         var result = userService.AddUser("Jan", "Kowalski", "kowal", DateTime.Parse("2000-01-01"), 2);
-        
+
         //Assert
-        Assert.Equal(false,result);
+        Assert.Equal(false, result);
     }
+
+    [Fact]
+    public void AddUser_Returns_False_When_Age_Less_Than_21()
+    {
+        //Arrange
+        var userService = new UserService();
+
+        //Act
+        var result = userService.AddUser("Jan", "Kowalski", "kowal", DateTime.Parse("2020-01-01"), 2);
+
+        //Assert
+        Assert.Equal(false, result);
+    }
+
 }
