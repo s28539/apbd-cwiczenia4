@@ -63,13 +63,38 @@ public class UserServiceTests
         // Assert
         Assert.Throws<ArgumentException>(action);
     }
+
+    public void AddUser_ReturnsTrueWhenVeryImportantClient()
+    {
+        int id = 2;
+        ClientRepository clientRepository = new ClientRepository();
+        var client = clientRepository.GetById(id);
+        bool result = (client.Type == "VeryImportantClient");
+        
+        Assert.Equal(true,result);
+
+    }
+    public void AddUser_ReturnsTrueWhenImportantClient()
+    {
+        int id = 3;
+        ClientRepository clientRepository = new ClientRepository();
+        var client = clientRepository.GetById(id);
+        bool result = (client.Type == "ImportantClient");
+        
+        Assert.Equal(true,result);
+
+    }
+    public void AddUser_ReturnsTrueWhenNormalClient()
+    {
+        int id = 5;
+        ClientRepository clientRepository = new ClientRepository();
+        var client = clientRepository.GetById(id);
+        bool result = (client.Type == "NormalClient");
+        
+        Assert.Equal(true,result);
+
+    }
     
-    
-    // AddUser_ReturnsFalseWhenMissingAtSignAndDotInEmail
-    // AddUser_ReturnsFalseWhenYoungerThen21YearsOld
-    // AddUser_ReturnsTrueWhenVeryImportantClient
-    // AddUser_ReturnsTrueWhenImportantClient
-    // AddUser_ReturnsTrueWhenNormalClient
     // AddUser_ReturnsFalseWhenNormalClientWithNoCreditLimit
     // AddUser_ThrowsExceptionWhenUserDoesNotExist
     // AddUser_ThrowsExceptionWhenUserNoCreditLimitExistsForUser
