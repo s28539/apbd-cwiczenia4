@@ -63,7 +63,7 @@ public class UserServiceTests
         // Assert
         Assert.Throws<ArgumentException>(action);
     }
-
+    [Fact]
     public void AddUser_ReturnsTrueWhenVeryImportantClient()
     {
         int id = 2;
@@ -74,6 +74,7 @@ public class UserServiceTests
         Assert.Equal(true,result);
 
     }
+    [Fact]
     public void AddUser_ReturnsTrueWhenImportantClient()
     {
         int id = 3;
@@ -84,6 +85,18 @@ public class UserServiceTests
         Assert.Equal(true,result);
 
     }
+    [Fact]
+    public void AddUser_ReturnsTrueWhenNormalClient()
+    {
+        int id = 5;
+        ClientRepository clientRepository = new ClientRepository();
+        var client = clientRepository.GetById(id);
+        bool result = (client.Type == "NormalClient");
+        
+        Assert.Equal(true,result);
+
+    }
+    [Fact]
     public void AddUser_ReturnsTrueWhenNormalClient()
     {
         int id = 5;
