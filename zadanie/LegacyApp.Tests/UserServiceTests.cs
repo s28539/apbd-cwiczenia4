@@ -4,7 +4,7 @@ namespace LegacyApp.Tests;
 public class UserServiceTests
 {
     [Fact]
-    public void AddUser_ReturnsFalseWhenFirstNameIsEmpty()
+    public void AddUser_Returns_False_When_FirstName_Is_Empty()
     {
         //Arrange
         var userService = new UserService();
@@ -20,7 +20,7 @@ public class UserServiceTests
     }
 
     [Fact]
-    public void AddUser_ReturnsFalseWhenEmailWithout_At_And_Dot()
+    public void AddUser_Returns_False_When_Email_Without_At_And_Dot()
     {
         //Arrange
         var userService = new UserService();
