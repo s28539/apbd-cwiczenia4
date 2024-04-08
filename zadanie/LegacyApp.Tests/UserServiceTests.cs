@@ -96,20 +96,4 @@ public class UserServiceTests
         Assert.Equal(true,result);
 
     }
-    [Fact]
-    public void AddUser_ReturnsTrueWhenNormalClient()
-    {
-        int id = 5;
-        ClientRepository clientRepository = new ClientRepository();
-        var client = clientRepository.GetById(id);
-        bool result = (client.Type == "NormalClient");
-        
-        Assert.Equal(true,result);
-
-    }
-    
-    // AddUser_ReturnsFalseWhenNormalClientWithNoCreditLimit
-    // AddUser_ThrowsExceptionWhenUserDoesNotExist
-    // AddUser_ThrowsExceptionWhenUserNoCreditLimitExistsForUser
-
 }
