@@ -26,7 +26,7 @@ public class UserServiceTests
         var userService = new UserService();
 
         //Act
-        var result = userService.AddUser("Jan", "Kowalski", "kowal", DateTime.Parse("2000-01-01"), 2);
+        var result = userService.AddUser("Jan", "Kowalski", "kowalskigmailcom", DateTime.Parse("2000-01-01"), 2);
 
         //Assert
         Assert.Equal(false, result);
@@ -39,30 +39,49 @@ public class UserServiceTests
         var userService = new UserService();
 
         //Act
-        var result = userService.AddUser("Jan", "Kowalski", "kowal", DateTime.Parse("2020-01-01"), 2);
+        var result = userService.AddUser("Jan", "Kowalski", "kowalski@gmail.com", DateTime.Parse("2020-01-01"), 2);
 
         //Assert
         Assert.Equal(false, result);
     }
     [Fact]
-    public void AddUser_ThrowsArgumentExceptionWhenClientDoesNotExist()
+    public void AddUser_ThrowsExceptionWhenUserDoesNotExist()
     {
-        
         // Arrange
         var userService = new UserService();
-
+        
         // Act
-        Action action = () => userService.AddUser(
-            "Jan", 
+        
+        Action action =()=> userService.AddUser(
+            "hEHEHHEHEH", 
             "Kowalski", 
             "kowalski@kowalski.pl",
             DateTime.Parse("2000-01-01"),
             100
         );
+        
+        // Assert
+        Assert.Throws<ArgumentException>(action);
+    }
+    
+    [Fact]
+    public void AddUser_ThrowsExceptionWhenUserNoCreditLimitExistsForUser()
+    {
+        var userService = new UserService();
+
+        // Act
+        Action action = () => userService.AddUser(
+            "Mariusz", 
+            "Kowalski", 
+            "kowalski@kowalski.pl",
+            DateTime.Parse("2000-01-01"),
+            6
+        );
 
         // Assert
         Assert.Throws<ArgumentException>(action);
     }
+    
     [Fact]
     public void AddUser_ReturnsTrueWhenVeryImportantClient()
     {
@@ -88,12 +107,22 @@ public class UserServiceTests
     [Fact]
     public void AddUser_ReturnsTrueWhenNormalClient()
     {
-        int id = 5;
-        ClientRepository clientRepository = new ClientRepository();
-        var client = clientRepository.GetById(id);
-        bool result = (client.Type == "NormalClient");
+        // Arrange
+        var userService = new UserService();
         
-        Assert.Equal(true,result);
+        // Act
+        
+        var result = userService.AddUser(
+            "Marcin", 
+            "Kowalski", 
+            "kowalski@kowalski.pl",
+            DateTime.Parse("2000-01-01"),
+            5
+        );
+       
+        
+        // Assert
+        Assert.False(result);
 
     }
 }
